@@ -5,16 +5,15 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
 
-export async function fetchWithError(
+export async function fetchWithError<T>(
   url: string,
   { body, headers, ...options }: RequestInit,
-) {
+): Promise<T> {
   const response = await fetch(url, {
     headers: { "Content-Type": "application/json", ...headers },
     body,
     ...options,
   });
-
   if (!response.ok) {
     const { status } = response;
     const data = await response.json();
