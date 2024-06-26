@@ -1,0 +1,28 @@
+import clsx, { ClassValue } from "clsx";
+import { twMerge } from "tailwind-merge";
+
+export function cn(...inputs: ClassValue[]) {
+  return twMerge(clsx(inputs));
+}
+
+export async function fetchWithError(
+  url: string,
+  { body, headers, ...options }: RequestInit,
+) {
+  const response = await fetch(url, {
+    headers: { "Content-Type": "application/json", ...headers },
+    body,
+    ...options,
+  });
+
+  if (!response.ok) {
+    const { status } = response;
+    const data = await response.json();
+
+    throw new Error(data.message ?? `Status ${status}: Failed to fetch`);
+  }
+
+  const data = await response.json();
+
+  return data;
+}
