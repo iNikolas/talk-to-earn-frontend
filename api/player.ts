@@ -5,7 +5,7 @@ import { routes } from "./config";
 import { PlayerApiResponse } from "./types";
 import { playerFromApiResponseFactory } from "./utils";
 
-const apiUrl = process.env.API_URL;
+const apiUrl = process.env.NEXT_PUBLIC_API_URL;
 
 if (!apiUrl) {
   throw new Error("API_URL must be defined as environment variable");
