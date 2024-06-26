@@ -4,12 +4,12 @@ export interface TelegramPlayerInfo {
 }
 
 export interface Player extends TelegramPlayerInfo {
-  playerId: number;
+  playerId: string;
   name: string;
   coins: number;
   character: Character;
 }
 
 export interface Character {
-  characterId: number;
+  characterId: string;
 }
