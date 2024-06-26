@@ -1,5 +1,6 @@
 import { createEffect } from "effector";
 
-const telegram = window?.Telegram.WebApp;
-
-export const initializeTelegramAppFx = createEffect(() => telegram.ready());
+export const initializeTelegramAppFx = createEffect(() => {
+  const telegram = window.Telegram.WebApp;
+  telegram.ready();
+});
