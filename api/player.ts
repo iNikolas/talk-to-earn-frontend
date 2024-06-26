@@ -8,7 +8,9 @@ import { playerFromApiResponseFactory } from "./utils";
 const apiUrl = process.env.NEXT_PUBLIC_API_URL;
 
 if (!apiUrl) {
-  throw new Error("API_URL must be defined as environment variable");
+  throw new Error(
+    "NEXT_PUBLIC_API_URL must be defined as environment variable",
+  );
 }
 
 export async function fetchPlayerInfo(
