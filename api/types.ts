@@ -1,10 +1,10 @@
 export interface CharacterApiResponse {
-  character_id: number;
+  character_id: string;
   telegram_id: number;
 }
 
 export interface PlayerApiResponse {
-  user_id: number;
+  user_id: string;
   telegram_id: number;
   name: string;
   registration_date: string;
