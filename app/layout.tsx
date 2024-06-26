@@ -1,5 +1,8 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
+import Script from "next/script";
+import React from "react";
+
 import "./globals.css";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -16,6 +19,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <Script
+        src="https://telegram.org/js/telegram-web-app.js"
+        strategy="beforeInteractive"
+      />
       <body className={inter.className}>{children}</body>
     </html>
   );
