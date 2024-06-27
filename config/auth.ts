@@ -10,5 +10,7 @@ export const authCookies = [
   userCookieKey,
 ];
 
+export const roles = { user: "user", admin: "admin" } as const;
+
 export const protectedRoutes = [links.admin];
 export const authRoutes = [links.login, links.register];

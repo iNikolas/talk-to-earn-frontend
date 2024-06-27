@@ -2,6 +2,8 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import type { Config } from "tailwindcss";
 
+import { palette } from "./theme";
+
 const config: Config = {
   content: [
     "./pages/**/*.{js,ts,jsx,tsx,mdx}",
@@ -16,6 +18,20 @@ const config: Config = {
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
       },
     },
+  },
+  daisyui: {
+    themes: [
+      {
+        light: {
+          // eslint-disable-next-line import/no-extraneous-dependencies, global-require, @typescript-eslint/no-var-requires, @typescript-eslint/dot-notation
+          ...require("daisyui/src/theming/themes")["light"],
+          ...palette,
+
+          "--rounded-btn": "0.625rem",
+          "--rounded-box": "0.625rem",
+        },
+      },
+    ],
   },
   plugins: [require("@tailwindcss/typography"), require("daisyui")],
 };

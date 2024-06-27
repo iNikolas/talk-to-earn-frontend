@@ -1,3 +1,100 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components {
+  .btn {
+    height: auto;
+    min-height: 2.5rem;
+    font-size: 1rem;
+    font-weight: 500;
+  }
+
+  .btn-neutral {
+    --btn-color: var(--nc);
+    color: oklch(var(--pc));
+  }
+
+  .input,
+  .select {
+    background-color: oklch(var(--n));
+    color: oklch(var(--sc));
+    font-size: 1rem;
+    height: 2.8125rem;
+    min-height: 2.8125rem;
+  }
+
+  .input::placeholder,
+  .select::placeholder {
+    color: oklch(var(--nc));
+    font-weight: 500;
+  }
+
+  .nav-element {
+    display: flex;
+    gap: 1rem;
+    font-weight: 600;
+    height: 58px;
+    align-items: center;
+    border-radius: var(--rounded-btn);
+    padding-inline: 1.25rem;
+  }
+
+  .nav-element--active {
+    background-color: oklch(var(--s));
+  }
+
+  .nav-element:hover:not(.nav-element--active) {
+    background-color: oklch(var(--s) / 0.25);
+  }
+
+  .breadcrumbs {
+    padding: unset;
+    font-weight: 400;
+    color: oklch(var(--nc));
+    margin-bottom: 1rem;
+  }
+
+  .breadcrumbs > ul > li + *:before,
+  .breadcrumbs > ol > li + *:before {
+    height: 0.5rem;
+    width: 0.5rem;
+    border-top: 2px solid;
+    border-right: 2px solid;
+  }
+
+  .divider {
+    height: 0;
+  }
+
+  .table :where(tbody td) {
+    color: oklch(var(--nc));
+  }
+
+  .table-lg :where(tbody td) {
+    color: oklch(var(--nc));
+    padding-inline: 1rem;
+    line-height: 161.8%;
+  }
+
+  .table :where(thead td, tfoot td) {
+    background-color: oklch(var(--n));
+    color: oklch(var(--bc));
+  }
+
+  .table-lg :where(thead td, tfoot td) {
+    font-size: 1rem;
+    line-height: 161.8%;
+    font-weight: 400;
+    padding-inline: 1rem;
+  }
+
+  .table :where(tbody tr:not(:last-child), tbody tr:first-child:last-child) {
+    border-bottom-color: oklch(var(--s) / var(--tw-border-opacity));
+  }
+
+  .table :where(thead tr) {
+    border-top: 1px solid oklch(var(--p));
+    border-bottom: 1px solid oklch(var(--p));
+  }
+}
