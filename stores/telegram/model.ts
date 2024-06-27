@@ -1,4 +1,4 @@
-import { sample } from "effector";
+import { createStore, sample } from "effector";
 import { createGate } from "effector-react";
 
 import {
@@ -9,8 +9,24 @@ import {
 
 export const Gate = createGate();
 
-sample({ clock: Gate.open, target: initializeTelegramAppFx });
+const $initialized = createStore(false);
+
+sample({
+  clock: Gate.open,
+  source: $initialized,
+  filter: (initialized) => !initialized,
+  target: initializeTelegramAppFx,
+});
+
+sample({
+  clock: Gate.open,
+  fn: () => true,
+  target: $initialized,
+});
 
 sample({ clock: initializeTelegramAppFx.doneData, target: getUserDataFx });
 
-sample({ clock: initializeTelegramAppFx.failData, target: showErrorMessageFx });
+sample({
+  clock: [initializeTelegramAppFx.failData, getUserDataFx.failData],
+  target: showErrorMessageFx,
+});

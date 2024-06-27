@@ -4,10 +4,11 @@ export function initializeTelegram(onInitialized: (value: unknown) => void) {
   const telegram = window.Telegram?.WebApp;
 
   if (telegram) {
+    telegram.expand();
     onInitialized(telegram.ready());
+  } else {
+    setTimeout(() => {
+      initializeTelegram(onInitialized);
+    }, retryDelayMs);
   }
-
-  setTimeout(() => {
-    initializeTelegram(onInitialized);
-  }, retryDelayMs);
 }
