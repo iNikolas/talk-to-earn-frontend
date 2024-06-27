@@ -4,6 +4,7 @@ import { createGate } from "effector-react";
 import {
   getUserDataFx,
   initializeTelegramAppFx,
+  setupTelegramApplicationFx,
   showErrorMessageFx,
 } from "@/effects";
 
@@ -26,7 +27,13 @@ sample({
 
 sample({ clock: initializeTelegramAppFx.doneData, target: getUserDataFx });
 
+sample({ clock: getUserDataFx.doneData, target: setupTelegramApplicationFx });
+
 sample({
-  clock: [initializeTelegramAppFx.failData, getUserDataFx.failData],
+  clock: [
+    initializeTelegramAppFx.failData,
+    getUserDataFx.failData,
+    setupTelegramApplicationFx.failData,
+  ],
   target: showErrorMessageFx,
 });

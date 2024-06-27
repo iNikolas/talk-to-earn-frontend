@@ -15,12 +15,18 @@ export const getUserDataFx = createEffect((): TelegramPlayerInfo => {
   const telegramId = telegram.initDataUnsafe.user?.id;
   const photoUrl = telegram.initDataUnsafe.user?.photo_url;
 
-  if (telegramId == null || photoUrl == null) {
-    throw new Error("Player's Telegram Info is incomplete!");
+  if (telegramId == null) {
+    throw new Error("We are not recognizing you");
   }
 
   return {
     telegramId,
-    photoUrl,
+    photoUrl: photoUrl ?? "",
   };
+});
+
+export const setupTelegramApplicationFx = createEffect(() => {
+  const telegram = window.Telegram.WebApp;
+
+  telegram.expand();
 });
