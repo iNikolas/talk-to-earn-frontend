@@ -1,15 +1,22 @@
 import { createEffect } from "effector";
 import { TelegramPlayerInfo } from "@/entities";
-import { initializeTelegram } from "@/utils";
+import { initializeTelegram, mockTelegramDataFactory } from "@/utils";
 
-export const initializeTelegramAppFx = createEffect(
-  () =>
-    new Promise((resolve) => {
-      initializeTelegram(resolve);
-    }),
+export const initializeTelegramAppFx = createEffect(() =>
+  mockTelegramDataFactory()
+    ? null
+    : new Promise((resolve) => {
+        initializeTelegram(resolve);
+      }),
 );
 
 export const getUserDataFx = createEffect((): TelegramPlayerInfo => {
+  const mockedData = mockTelegramDataFactory();
+
+  if (mockedData) {
+    return mockedData;
+  }
+
   const telegram = window.Telegram.WebApp;
 
   const telegramId = telegram.initDataUnsafe.user?.id;
@@ -20,12 +27,16 @@ export const getUserDataFx = createEffect((): TelegramPlayerInfo => {
   }
 
   return {
-    telegramId,
+    telegramId: String(telegramId),
     photoUrl: photoUrl ?? "",
   };
 });
 
 export const setupTelegramApplicationFx = createEffect(() => {
+  if (mockTelegramDataFactory()) {
+    return;
+  }
+
   const telegram = window.Telegram.WebApp;
 
   telegram.expand();

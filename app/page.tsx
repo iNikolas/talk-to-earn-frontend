@@ -23,6 +23,7 @@ export default function Home() {
         <b>Coins: </b>
         {player.coins}
       </p>
+      <p>{player.photoUrl}</p>
     </section>
   );
 }

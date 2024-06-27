@@ -14,7 +14,7 @@ if (!apiUrl) {
 }
 
 export async function fetchPlayerInfo(
-  telegramId: number,
+  telegramId: string,
 ): Promise<Omit<Player, "photoUrl">> {
   const player = await fetchWithError<PlayerApiResponse>(
     `${apiUrl}${routes.player.base}/${telegramId}`,

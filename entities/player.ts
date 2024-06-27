@@ -1,5 +1,5 @@
 export interface TelegramPlayerInfo {
-  telegramId: number;
+  telegramId: string;
   photoUrl: string;
 }
 

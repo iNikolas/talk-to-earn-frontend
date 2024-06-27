@@ -1,6 +1,8 @@
 import clsx, { ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
 
+import { TelegramPlayerInfo } from "@/entities";
+
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
@@ -24,4 +26,17 @@ export async function fetchWithError<T>(
   const data = await response.json();
 
   return data;
+}
+
+export function mockTelegramDataFactory(): TelegramPlayerInfo | null {
+  const mockTelegramId = process.env.NEXT_PUBLIC_MOCK_TELEGRAM_ID;
+
+  if (!mockTelegramId) {
+    return null;
+  }
+
+  return {
+    photoUrl: "",
+    telegramId: mockTelegramId,
+  };
 }
