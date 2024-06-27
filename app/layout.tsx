@@ -23,7 +23,7 @@ export default function RootLayout({
     <html lang="en">
       <Scripts />
       <body className={inter.className}>
-        {children} <ToastContainer />
+        <main className="min-h-dvh">{children}</main> <ToastContainer />
       </body>
     </html>
   );

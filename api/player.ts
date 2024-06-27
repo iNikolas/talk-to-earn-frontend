@@ -17,7 +17,7 @@ export async function fetchPlayerInfo(
   telegramId: number,
 ): Promise<Omit<Player, "photoUrl">> {
   const player = await fetchWithError<PlayerApiResponse>(
-    `${apiUrl}${routes.player}/${telegramId}`,
+    `${apiUrl}${routes.player.base}/${telegramId}`,
     { method: "GET" },
   );
   return playerFromApiResponseFactory(player);

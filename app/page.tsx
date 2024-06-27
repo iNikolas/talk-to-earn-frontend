@@ -16,13 +16,13 @@ export default function Home() {
   }
 
   return (
-    <main className="prose">
+    <section className="prose">
       <h2>{player.name}</h2>
       <Image src={player.photoUrl} alt="player avatar" />
       <p>
         <b>Coins: </b>
         {player.coins}
       </p>
-    </main>
+    </section>
   );
 }
