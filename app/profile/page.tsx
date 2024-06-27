@@ -1,6 +1,7 @@
 "use client";
 
 import { useGate, useUnit } from "effector-react";
+import Image from "next/image";
 import { useRouter } from "next/navigation";
 import React from "react";
 
@@ -20,13 +21,21 @@ export default function Home() {
   }
 
   return (
-    <section>
+    <section className="prose">
+      <h2>{player.name}</h2>
+      {!!player.photoUrl && <Image src={player.photoUrl} alt="player avatar" />}
+      <p>
+        <b>Coins: </b>
+        {player.coins}
+      </p>
+      <p>{player.photoUrl}</p>
+
       <button
         type="button"
         className="btn btn-primary"
-        onClick={() => router.push(links.profile)}
+        onClick={() => router.push(links.home)}
       >
-        Profile
+        Main page
       </button>
     </section>
   );
