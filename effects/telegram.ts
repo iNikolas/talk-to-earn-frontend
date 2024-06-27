@@ -1,10 +1,13 @@
 import { createEffect } from "effector";
 import { TelegramPlayerInfo } from "@/entities";
+import { initializeTelegram } from "@/utils";
 
-export const initializeTelegramAppFx = createEffect(() => {
-  const telegram = window.Telegram.WebApp;
-  telegram.ready();
-});
+export const initializeTelegramAppFx = createEffect(
+  () =>
+    new Promise((resolve) => {
+      initializeTelegram(resolve);
+    }),
+);
 
 export const getUserDataFx = createEffect((): TelegramPlayerInfo => {
   const telegram = window.Telegram.WebApp;
