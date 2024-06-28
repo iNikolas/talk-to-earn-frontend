@@ -10,7 +10,7 @@ export default function Layout({
   return (
     <>
       <Scripts />
-      <div className="min-h-dvh bg-info flex flex-col p-2">
+      <div className="min-h-dvh bg-neutral flex flex-col p-2">
         <main className="grow flex flex-col">{children}</main>
       </div>
     </>
