@@ -2,7 +2,7 @@
 
 import React from "react";
 
-import { MdOutlineExpandCircleDown } from "react-icons/md";
+import { IoMdArrowDown } from "react-icons/io";
 import { cn } from "@/utils";
 
 import { TableProps } from "./types";
@@ -54,11 +54,7 @@ export function Table({ container = {}, children, table }: TableProps) {
                         isDesc(index) && "rotate-180",
                       )}
                     >
-                      {SortColumnIcon ? (
-                        <SortColumnIcon />
-                      ) : (
-                        <MdOutlineExpandCircleDown />
-                      )}
+                      {SortColumnIcon ? <SortColumnIcon /> : <IoMdArrowDown />}
                     </span>
                   )}
                 </button>
