@@ -15,6 +15,14 @@ import { fetchWithError } from "@/utils";
 
 const MILLISECONDS = 1000;
 
+function logout(request: NextRequest) {
+  const response = NextResponse.redirect(new URL(links.login, request.url));
+
+  authCookies.forEach((name) => response.cookies.delete(name));
+
+  return response;
+}
+
 export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
@@ -47,11 +55,7 @@ export async function middleware(request: NextRequest) {
     !decodedToken.exp || decodedToken.exp < Date.now() / MILLISECONDS;
 
   if (isExpired) {
-    const response = NextResponse.redirect(new URL(links.login, request.url));
-
-    authCookies.forEach((name) => response.cookies.delete(name));
-
-    return response;
+    return logout(request);
   }
 
   if (isAuthRoute || isNotAuthorizedRoute) {
@@ -69,10 +73,10 @@ export async function middleware(request: NextRequest) {
       );
 
       if (user.role !== roles.admin) {
-        throw new Error("User in not an Admin");
+        return NextResponse.redirect(new URL(links.notAuthorized, request.url));
       }
     } catch (err) {
-      return NextResponse.redirect(new URL(links.notAuthorized, request.url));
+      return logout(request);
     }
   }
 

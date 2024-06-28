@@ -33,3 +33,8 @@ export interface Tokens {
 export interface LoginResponse extends Tokens {
   data: UserResponse;
 }
+
+export interface PaginationDto {
+  page?: number;
+  limit?: number;
+}

@@ -9,6 +9,7 @@ export function playerFromApiResponseFactory(
     telegramId: data.telegram_id,
     name: data.name,
     coins: data.coins,
+    registrationDate: data.registration_date,
     character: {
       characterId: data.character.character_id,
     },

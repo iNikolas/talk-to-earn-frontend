@@ -8,6 +8,7 @@ export interface Player extends TelegramPlayerInfo {
   name: string;
   coins: number;
   character: Character;
+  registrationDate: string;
 }
 
 export interface Character {
