@@ -36,15 +36,12 @@ export async function middleware(request: NextRequest) {
   );
   const isGameRoute = pathname === links.home;
 
-  if (
-    (!refreshToken && isNotAuthorizedRoute) ||
-    (refreshToken && (isAuthRoute || isGameRoute || isAdminPage))
-  ) {
+  if (refreshToken && (isAuthRoute || isGameRoute || isAdminPage)) {
     return NextResponse.redirect(new URL(links.dashboard, request.url));
   }
 
   if (!refreshToken) {
-    return isProtectedRoute || isAdminPage
+    return isProtectedRoute || isAdminPage || isNotAuthorizedRoute
       ? NextResponse.redirect(new URL(links.login, request.url))
       : NextResponse.next();
   }
@@ -58,11 +55,11 @@ export async function middleware(request: NextRequest) {
     return logout(request);
   }
 
-  if (isAuthRoute || isNotAuthorizedRoute) {
+  if (isAuthRoute) {
     return NextResponse.redirect(new URL(links.dashboard, request.url));
   }
 
-  if (isProtectedRoute) {
+  if (isProtectedRoute || isNotAuthorizedRoute) {
     try {
       const user = await fetchWithError<UserResponse>(
         apiEndpoints.currentUser,
@@ -72,8 +69,12 @@ export async function middleware(request: NextRequest) {
         },
       );
 
-      if (user.role !== roles.admin) {
+      if (user.role !== roles.admin && !isNotAuthorizedRoute) {
         return NextResponse.redirect(new URL(links.notAuthorized, request.url));
+      }
+
+      if (user.role === roles.admin && isNotAuthorizedRoute) {
+        return NextResponse.redirect(new URL(links.dashboard, request.url));
       }
     } catch (err) {
       return logout(request);
